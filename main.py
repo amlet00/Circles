@@ -1,15 +1,15 @@
 import sys
 import random
 
-from PyQt5 import uic
+from UI import Ui_Painting
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QPainter, QColor
 
 
-class Painting(QMainWindow):
+class Painting(QMainWindow, Ui_Painting):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
 
         self.do_paint = False
 
@@ -29,7 +29,8 @@ class Painting(QMainWindow):
     def draw(self, qp):
         radius = random.randint(1, self.width()) // 2
         x, y = random.randint(0, self.width() - radius), random.randint(0, self.height() - radius)
-        qp.setBrush(QColor(255, 255, 0))
+        r, g, b = random.randint(0, 256), random.randint(0, 256), random.randint(0, 256)
+        qp.setBrush(QColor(r, g, b))
         qp.drawEllipse(x, y, radius, radius)
 
 
